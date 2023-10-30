@@ -1,0 +1,247 @@
+Python
+Java
+JavaScript
+C
+C++
+C#
+PHP
+Ruby
+Go
+Swift
+Kotlin
+Rust
+TypeScript
+HTML
+CSS
+SQL
+NoSQL
+MongoDB
+PostgreSQL
+SQLite
+Redis
+Elasticsearch
+Docker
+Kubernetes
+Microservices
+Angular
+React
+Vue
+Node.js
+Express
+Django
+Flask
+Spring Boot
+.NET
+TensorFlow
+PyTorch
+Pandas
+NumPy
+Scikit-learn
+Matplotlib
+Seaborn
+Bokeh
+Jupyter
+Data Science
+Machine Learning
+Deep Learning
+Artificial Intelligence
+Natural Language Processing
+Computer Vision
+Reinforcement Learning
+Neural Network
+Convolutional Neural Network
+Recurrent Neural Network
+GANs
+Blockchain
+Bitcoin
+Ethereum
+Smart Contract
+Cloud Computing
+AWS
+Azure
+GCP
+Serverless
+DevOps
+Git
+GitHub
+Bitbucket
+Agile
+Scrum
+Kanban
+CI/CD
+JUnit
+Selenium
+REST
+GraphQL
+JSON
+XML
+YAML
+API
+UI
+UX
+VR
+AR
+IoT
+Raspberry Pi
+Arduino
+Linux
+Ubuntu
+CentOS
+Fedora
+Debian
+Windows
+macOS
+Android
+iOS
+Firmware
+Cybersecurity
+Encryption
+Firewall
+VPN
+DDoS
+Malware
+Ransomware
+Phishing
+Two-factor Authentication
+Biometrics
+Virtual Machine
+Container
+Orchestration
+Big Data
+Hadoop
+Spark
+Kafka
+Flink
+ETL
+Data Warehouse
+Business Intelligence
+Data Mining
+Web Scraping
+Web Development
+Frontend
+Backend
+Full Stack
+Software Engineering
+Database
+Schema
+Query
+Indexing
+Normalization
+Denormalization
+Object-Oriented Programming
+Functional Programming
+Procedural Programming
+Scripting
+Compiler
+Interpreter
+IDE
+Debugging
+Refactoring
+Version Control
+Concurrency
+Multithreading
+Synchronization
+Deadlock
+Memory Management
+Garbage Collection
+Exception Handling
+PaaS
+IaaS
+SaaS
+Hashing
+Cryptography
+Algorithm
+Data Structure
+Stack
+Queue
+Tree
+Graph
+Linked List
+Array
+Matrix
+Sorting
+Searching
+BFS
+DFS
+Dynamic Programming
+Greedy Algorithm
+Divide and Conquer
+Backtracking
+Recursion
+MapReduce
+Object-Relational Mapping
+Virtual Reality
+Augmented Reality
+Mixed Reality
+Cyber-Physical System
+Edge Computing
+Fog Computing
+Fifth Generation
+Quantum Computing
+Server
+Client
+Peer-to-Peer
+Blockchain
+Tangle
+Distributed Ledger
+Smart Grid
+Autonomous Vehicle
+Drone
+3D Printing
+Cryptocurrency
+Token
+Initial Coin Offering
+Public Key
+Private Key
+Digital Signature
+Zero-Knowledge Proof
+Merkle Tree
+Side Chain
+Hard Fork
+Soft Fork
+Data Lake
+Data Mart
+OLAP
+OLTP
+CAP Theorem
+ACID
+BASE
+Event-Driven
+Microfrontend
+Service Mesh
+Progressive Web App
+WebAssembly
+GraphQL
+gRPC
+Thrift
+Protocol Buffers
+WebRTC
+Socket.IO
+OAuth
+OpenID
+LDAP
+RBAC
+XSS
+CSRF
+SQL Injection
+Buffer Overflow
+Shellshock
+Heartbleed
+Spectre
+Meltdown
+Row Hammer
+BlueKeep
+Zero Day
+White Hat
+Black Hat
+Gray Hat
+Rainbow Table
+Brute Force
+Dictionary Attack
+Man in the Middle
+Replay Attack
+Denial of Service
+SYN Flood
+Smurf Attack
+IP Spoofing
+Phreaking

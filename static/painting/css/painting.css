@@ -1,0 +1,227 @@
+@font-face {
+    font-family: 'wenkai';
+    src: url('../font/LXGWWenKaiMonoGB-Bold.ttf') format('truetype');
+}
+
+@media screen and (max-width: 320px) {
+    html {
+        font-size: 15px;
+    }
+
+    .container {
+        max-width: 55vh;
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    html {
+        font-size: 16px;
+    }
+
+    .container {
+        max-width: 55vh;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+    html {
+        font-size: 17px;
+    }
+
+    .container {
+        max-width: 55vh;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    html {
+        font-size: 18px;
+    }
+
+    .container {
+        max-width: 55vh;
+        margin: 0 auto;
+    }
+}
+
+
+html {
+    font-family: 'wenkai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+    letter-spacing: 0.25rem;
+    font-weight: bold;
+}
+
+.container {
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    min-width: 375px;
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.container.active {
+    display: block;
+}
+
+
+#tab1 {
+    background-image: url('../img/page1.jpg');
+}
+
+#tab2 {
+    background-image: url('../img/page2.jpg');
+}
+
+.tab2-box {
+    position: fixed;
+    top: 1rem;
+    padding: 1rem 1rem;
+    font-size: 1.75rem;
+    color: #FFFFFFD9;
+}
+
+.tab2-box > p > small {
+    line-height: 3rem;
+    font-size: 3.5rem;
+}
+
+#tab3 {
+    background-image: url('../img/page3.jpg');
+}
+
+.tab3-box {
+    position: fixed;
+    top: 1rem;
+    padding: 1rem 1rem;
+    font-size: 1.75rem;
+    color: #ffa940;
+}
+
+.tab3-box > p > small {
+    line-height: 3rem;
+    font-size: 3.5rem;
+}
+
+#tab4 {
+    background-image: url('../img/page4.jpg');
+}
+
+.tab4-box {
+    writing-mode: vertical-lr;
+    position: fixed;
+    top: 2rem;
+    font-size: 1.75rem;
+    color: #FFFFFFD9;
+}
+
+#tab4 > .tab4-box > p:last-child {
+    writing-mode: horizontal-tb;
+    margin: 0 0;
+    height: 30vh;
+    width: 13rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+
+#tab5 {
+    background-image: url('../img/page5.jpg');
+}
+
+.tab5-box {
+    position: relative;
+    top: 2rem;
+    left: 0.75rem;
+    color: #597ef7;
+}
+
+#tab5 > .tab5-box > p:nth-child(1) {
+    position: relative;
+    top: -6rem;
+    left: 0.8rem;
+    transform: rotate(-43deg);
+    font-size: 1.75rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(2) {
+    position: relative;
+    top: 3.2rem;
+    left: 7.8rem;
+    transform: rotate(42deg);
+    font-size: 3.5rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(3) {
+    position: relative;
+    top: 8rem;
+    left: 2rem;
+    transform: rotate(45deg);
+    font-size: 2.5rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(4) {
+    position: relative;
+    top: -13rem;
+    left: 11.7rem;
+    transform: rotate(-50deg);
+    font-size: 1.75rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(5) {
+    position: relative;
+    top: -5.6rem;
+    left: 9.7rem;
+    transform: rotate(-50deg);
+    font-size: 2rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(6) {
+    position: relative;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.5rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(6) > small {
+    font-size: 3rem;
+}
+
+#tab5 > .tab5-box > p:nth-child(7) {
+    position: relative;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.5rem;
+    line-height: 0;
+}
+
+#tab5 > .tab5-box > p:nth-child(7) > small {
+    font-size: 3rem;
+}
+
+
+#tab6 {
+    background-image: url('../img/page6.jpg');
+}
+
+#tab6 > .tab6-box {
+    position: fixed;
+    bottom: 7%;
+    padding-left: 2rem;
+    font-size: 1.75rem;
+    color: #FFFFFFD9;
+}
+
+#tab7 {
+    background-image: url('../img/page7.jpg');
+}
+
