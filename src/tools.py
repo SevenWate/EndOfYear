@@ -97,3 +97,29 @@ def remove_html_tags(text):
     :return:文本
     """
     return BeautifulSoup(text, "html.parser").get_text()
+
+
+def get_yiyan():
+    """
+    获取一言文学语句
+    :return:一言
+    """
+    try:
+        response = requests.get("https://v1.hitokoto.cn/?c=d&min_length=12&encode=text", timeout=30)  # Set timeout to 5 seconds
+        if response.status_code == 200:
+            return response.text
+        else:
+            logger.error(f"一言网站无法访问,状态码:{response.status_code}")
+            return False
+    except requests.Timeout as e:
+        logger.error(f"一言请求超时 30 秒,错误:{e}")
+        return False
+    except requests.ConnectionError as e:
+        logger.error(f"一言连接错误,错误:{e}")
+        return False
+    except requests.RequestException as e:
+        logger.error(f"一言网站无法访问,错误:{e}")
+        return False
+    except Exception as e:
+        logger.error(f"一言未知错误,错误:{e}")
+        return False

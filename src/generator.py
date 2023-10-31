@@ -5,6 +5,7 @@ from loguru import logger
 from .analyzer import analyze_sentiment, calculate_weight, classify_and_extract_keywords
 from .config import Config
 from .scraper import Blog
+from .tools import get_yiyan
 
 
 def build_data():
@@ -30,6 +31,7 @@ def build_data():
         "blog_link": my_blog.link,
         "blog_article_count": my_blog.article_count,
         "blog_article_word_count": my_blog.article_word_count,
+        "blog_end_yiyan": get_yiyan()
     }
 
     if my_blog.life is None:

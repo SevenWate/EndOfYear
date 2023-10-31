@@ -3,6 +3,11 @@
     src: url('../font/LXGWWenKaiMonoGB-Bold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'dongzhu';
+    src: url('../font/dongzhu-Extralight.ttf') format('truetype');
+}
+
 @media screen and (max-width: 320px) {
     html {
         font-size: 15px;
@@ -81,6 +86,7 @@ html {
 
 .popup {
     position: absolute;
+    margin: 0 2px;
     bottom: 0.5rem;
     background: #fff;
     padding: 1.5rem;
@@ -264,5 +270,20 @@ html {
 
 #tab7 {
     background-image: url('../img/page7.jpg');
+}
+
+#tab7 > .tab7-box{
+    padding: 2rem 2rem;
+}
+
+.tab7-box > p {
+    font-family: 'dongzhu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+    font-size: 2.75rem;
+    line-height: 3.5rem;
+    writing-mode: vertical-rl;
+    color: #FFFFFFD9;
+    margin: 0;
 }
 

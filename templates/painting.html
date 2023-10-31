@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EndOfYear</title>
     {% if web_status == 1 %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/painting.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/painting.css') }}">
     {% else %}
-    <link rel="stylesheet" href="painting/css/normalize.css">
-    <link rel="stylesheet" href="painting/css/animate.min.css">
-    <link rel="stylesheet" href="painting/css/painting.css">
+        <link rel="stylesheet" href="painting/css/normalize.css">
+        <link rel="stylesheet" href="painting/css/animate.min.css">
+        <link rel="stylesheet" href="painting/css/painting.css">
     {% endif %}
     <script async src="https://umami.7wate.org/script.js"
             data-website-id="635fec50-bc6c-4ac2-909a-e2a7403438be"></script>
@@ -20,9 +20,10 @@
 <div class="container active animate__animated animate__fadeIn animate__slow" id="tab1">
     <audio id="bgm" loop>
         {% if web_status == 1 %}
-        <source src="{{ url_for('static', filename='painting/music/bgm.mp3') }}" type="audio/mpeg">Your browser does not support the audio element.
+            <source src="{{ url_for('static', filename='painting/music/bgm.mp3') }}" type="audio/mpeg">Your browser does
+            not support the audio element.
         {% else %}
-        <source src="painting/Time.ogg" type="audio/music/bgm.mp3">Your browser does not support the audio element.
+            <source src="painting/music/bgm.mp3" type="audio/mpeg">Your browser does not support the audio element.
         {% endif %}
 
     </audio>
@@ -48,12 +49,12 @@
     <div class="tab2-box">
         <p class="animate__animated animate__fadeIn animate__delay-1s">亲爱的{{ data.blog_name }}</p>
         {% if data.blog_life == 0 %}
-        <p class="animate__animated animate__fadeIn animate__delay-2s">旧事如梦，一年已过</p>
-        <p class="animate__animated animate__fadeIn animate__delay-2s">贰三年、感谢有你!</p>
+            <p class="animate__animated animate__fadeIn animate__delay-2s">旧事如梦，一年已过</p>
+            <p class="animate__animated animate__fadeIn animate__delay-2s">贰三年、感谢有你!</p>
         {% else %}
-        <p class="animate__animated animate__fadeIn animate__delay-2s">今天是我们相识的</p>
-        <p class="animate__animated animate__fadeIn animate__delay-3s">第 <small>{{ data.blog_life_year }}</small> 年
-            <small>{{ data.blog_life_day }}</small> 天</p>
+            <p class="animate__animated animate__fadeIn animate__delay-2s">今天是我们相识的</p>
+            <p class="animate__animated animate__fadeIn animate__delay-3s">第 <small>{{ data.blog_life_year }}</small> 年
+                <small>{{ data.blog_life_day }}</small> 天</p>
         {% endif %}
     </div>
 
@@ -63,8 +64,8 @@
         <p class="animate__animated animate__fadeInUp animate__delay-1s">这一年你写下了</p>
         <p class="animate__animated animate__fadeInUp animate__delay-2s"><small>{{ data.blog_article_count }}</small>
             篇博文</p>
-        <p class="animate__animated animate__fadeInUp animate__delay-3s"><small>{{ data.blog_article_word_count
-            }}</small> 个文字</p>
+        <p class="animate__animated animate__fadeInUp animate__delay-3s">
+            <small>{{ data.blog_article_word_count }}</small> 个文字</p>
     </div>
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab4">
@@ -78,7 +79,7 @@
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab5">
     <div class="tab5-box">
         {% for keyword in data.blog_top_keywords %}
-        <p>{{ keyword[0] }}</p>
+            <p>{{ keyword[0] }}</p>
         {% endfor %}
         <p class="animate__animated animate__fadeInDown animate__delay-1s">这些都是<small>你</small>的</p>
         <p class="animate__animated animate__fadeInDown animate__delay-2s">专属<small>关键词</small></p>
@@ -92,7 +93,7 @@
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab7">
     <div class="tab7-box">
-
+        <p id="yiyan"> {{ data.blog_end_yiyan }}</p>
     </div>
 </div>
 
@@ -143,8 +144,14 @@
 
     denyButton.addEventListener('click', function (event) {
         event.stopPropagation();
-        audioElement.pause();
         popup.style.display = 'none'; // 隐藏弹出窗口
+    });
+
+    // 博客最后的一言
+    window.addEventListener('DOMContentLoaded', (event) => {
+        let textElement = document.getElementById("yiyan");
+        let text = textElement.innerHTML;
+        textElement.innerHTML = text.replace(/[\u3000-\u303F\uFF01-\uFF0F\uFF1A-\uFF1E\uFF3B-\uFF3F\uFF5B-\uFF60\uFFE0-\uFFE6\u00D2]/g, "<br>");
     });
 </script>
 
