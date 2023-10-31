@@ -31,8 +31,6 @@ class Config:
             logger.error(f"没有权限读取配置文件 {self.path}： {str(e)}")
             raise
 
-        logger.info(f"配置文件 {self.path} 加载成功")
-
     @property
     def rss_url(self):
         try:

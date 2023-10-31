@@ -13,10 +13,37 @@
     <link rel="stylesheet" href="painting/css/animate.min.css">
     <link rel="stylesheet" href="painting/css/painting.css">
     {% endif %}
-    <script async src="https://umami.7wate.org/script.js" data-website-id="635fec50-bc6c-4ac2-909a-e2a7403438be"></script>
+    <script async src="https://umami.7wate.org/script.js"
+            data-website-id="635fec50-bc6c-4ac2-909a-e2a7403438be"></script>
 </head>
 <body>
-<div class="container active animate__animated animate__fadeIn animate__slow" id="tab1"></div>
+<div class="container active animate__animated animate__fadeIn animate__slow" id="tab1">
+    <audio id="bgm" loop>
+        {% if web_status == 1 %}
+        <source src="{{ url_for('static', filename='painting/music/bgm.mp3') }}" type="audio/mpeg">Your browser does not support the audio element.
+        {% else %}
+        <source src="painting/Time.ogg" type="audio/music/bgm.mp3">Your browser does not support the audio element.
+        {% endif %}
+
+    </audio>
+    <div class="popup">
+        <div class="notice">
+            <h4>温馨提示</h4>
+            <hr>
+            <p>EndofYear 使用互联网上公开的 RSS 数据源，并使用自建的 Umami 服务统计访问量，绝对不会主动获取个人隐私信息。🫣🫣🫣
+                <br>
+                <br>
+                开启方式：小手轻轻点 ~
+                <a href="https://github.com/7Wate/EndOfYear"></a>
+            </p>
+        </div>
+        <div class="selection">
+            <button value="true" class="allow">开启音乐</button>
+            <button value="false" class="deny">静音进入</button>
+
+        </div>
+    </div>
+</div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab2">
     <div class="tab2-box">
         <p class="animate__animated animate__fadeIn animate__delay-1s">亲爱的{{ data.blog_name }}</p>
@@ -70,11 +97,14 @@
 </div>
 
 <script>
+    // 屏幕尺寸
     console.log("Window inner size: ", window.innerWidth, "x", window.innerHeight);
     console.log("Window outer size: ", window.outerWidth, "x", window.outerHeight);
     console.log("Screen size: ", screen.width, "x", screen.height);
     console.log("Screen available size: ", screen.availWidth, "x", screen.availHeight);
-    var carousel = {
+
+    // 轮播切换
+    let carousel = {
         currentIndex: 0,
         tabs: [],
 
@@ -98,6 +128,24 @@
     window.onload = function () {
         carousel.init();
     };
+
+    // 弹出提示
+    let popup = document.querySelector('.popup');
+    let allowButton = document.querySelector('.allow');
+    let denyButton = document.querySelector('.deny');
+    let audioElement = document.getElementById('bgm');
+
+    allowButton.addEventListener('click', function (event) {
+        event.stopPropagation();
+        audioElement.play(); // 播放音乐
+        popup.style.display = 'none'; // 隐藏弹出窗口
+    });
+
+    denyButton.addEventListener('click', function (event) {
+        event.stopPropagation();
+        audioElement.pause();
+        popup.style.display = 'none'; // 隐藏弹出窗口
+    });
 </script>
 
 </body>
