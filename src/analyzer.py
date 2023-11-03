@@ -1,5 +1,3 @@
-from typing import Any
-
 import jieba.analyse
 import pytz
 from dateutil.parser import parse
@@ -7,31 +5,52 @@ from loguru import logger
 from lunardate import LunarDate
 from snownlp import SnowNLP
 
+import const
+
 
 # 计算文本内容情感分数
-def analyze_sentiment(text):
+def analyze_sentiment(keys):
     """
-    博客文章情感分计算（有点问题，酌情使用）
-    :param text:文章文本
+    博客文章情感分计算
+
+    :param keys:文章关键字
     :return:分数
     """
-    s = SnowNLP(text)
-    return round(s.sentiments * 100)
+    score_lists = [SnowNLP(key).sentiments for key in keys]
+    all_score = sum(score_lists)
+
+    if len(score_lists) > 10:
+        max_score = max(score_lists)
+        min_score = min(score_lists)
+        average_score = (all_score - max_score - min_score) / (len(keys) - 2)
+        return int(average_score * 1000)
+    elif 10 > len(score_lists) > 6:
+        average_score = all_score / len(keys)
+        return int(average_score * 900)
+    elif 6 > len(score_lists) > 3:
+        average_score = all_score / len(keys)
+        return int(average_score * 800)
+    elif 3 > len(score_lists) > 0:
+        average_score = all_score / len(keys)
+        return int(average_score * 500)
+    else:
+        return 0
 
 
-def classify_and_extract_keywords(text: str, topK: int, stopwords: str,
-                                  tech_terms_file: str) -> tuple[None, list[Any]] | tuple[int, Any]:
+def extract_keywords(text,
+                     topK,
+                     stopwords):
     """
-    博客文章关键字提取
+    文章关键字提取
     :param text:文章文本
-    :param topK:关键字数量，建议20个
-    :param stopwords:停词文本，去掉无意义词组
-    :param tech_terms_file:专业词语，区分文章类目
+    :param topK:关键字数量
+    :param stopwords:停词文本（去掉无意义词组）
     :return:
     """
     try:
         jieba.analyse.set_stop_words(stopwords)
         keywords = jieba.analyse.extract_tags(text, topK=topK)
+        return keywords
     except ValueError as e:
         logger.error(f"关键词提取出错：{e}")
         return None, []
@@ -39,72 +58,52 @@ def classify_and_extract_keywords(text: str, topK: int, stopwords: str,
         logger.error(f"关键词提取出错：{e}")
         return None, []
 
+
+def check_category(tech_terms_file, keywords):
+    """
+    文章分类判断
+    :param keywords: 文章关键词
+    :param tech_terms_file: 分类词典文件
+    :return: 分类常量
+    """
     with open(tech_terms_file, 'r', encoding='utf-8') as f:
-        tech_terms_set = {line.strip().lower() for line in f}
+        tech_terms_set = {line.strip().lower() for line in f}  # 读取分类词典文件，将其转化为小写并创建集合
 
     for keyword in keywords:
-        if keyword.lower() in tech_terms_set:
-            return 1, keywords
+        if keyword.lower() in tech_terms_set:  # 判断关键词是否在分类词典集合中
+            return const.BLOG_POST_CATEGORY_TECH  # 若关键词存在，则返回技术类分类常量
 
-    return 2, keywords
+    return const.BLOG_POST_CATEGORY_LIFE  # 若关键词不存在，则返回生活类分类常量
 
 
-def calculate_weight(time_str: str):
+def calculate_weight(time_str: str) -> int:
     """
-    博客文章特殊日期权重分数计算。
-        - 传统节假日 +10
-        - 节假日 +7
-        - 凌晨 +5
-        - 早上 +4
-        - 下午 +3
-        - 晚上 +2
+    计算文章特殊日期的权重分数。
+    - 传统节假日 +10
+    - 节假日 +7
+    - 凌晨 +5
+    - 早上 +4
+    - 下午 +3
+    - 晚上 +2
+
     :param time_str: 时间字符串
-    :return:总分数，特殊日期
+    :return: 总分数（整数）
     """
     dt = parse(time_str)
-    dt = dt.astimezone(pytz.timezone('Asia/Shanghai'))
+    dt = dt.astimezone(pytz.timezone(const.TIME_ZONE))
 
     weight = 0
-    date_str = ""
 
-    # 农历节日权重计算
-    LUNAR_HOLIDAYS = {
-        (1, 1): '春节',
-        (1, 15): '元宵节',
-        (2, 2): '龙抬头',
-        (5, 5): '端午节',
-        (7, 7): '七夕节',
-        (7, 15): '中元节',
-        (8, 15): '中秋节',
-        (9, 9): '重阳节',
-        (12, 8): '腊八节',
-        (12, 23): '小年',
-        (12, 30): '除夕'
-    }
-
+    # 计算农历节假日的权重
     lunar_date = LunarDate.fromSolarDate(dt.year, dt.month, dt.day)
-    if (lunar_date.month, lunar_date.day) in LUNAR_HOLIDAYS:
+    if (lunar_date.month, lunar_date.day) in const.LUNAR_HOLIDAYS:
         weight += 10
-        date_str = LUNAR_HOLIDAYS[(lunar_date.month, lunar_date.day)]
 
-    # 公历节日权重计算
-    SOLAR_HOLIDAYS = {
-        (1, 1): '元旦',
-        (2, 14): '情人节',
-        (3, 8): '国际妇女节',
-        (4, 4): '清明节',
-        (5, 1): '国际劳动节',
-        (10, 1): '国庆节',
-        (12, 13): '南京大屠杀纪念日',
-        (9, 18): '九一八事变纪念日',
-        (12, 7): '南京保卫战胜利纪念日',
-        (8, 15): '抗日战争胜利纪念日'
-    }
-
-    if (dt.month, dt.day) in SOLAR_HOLIDAYS:
+    # 计算公历节假日的权重
+    if (dt.month, dt.day) in const.SOLAR_HOLIDAYS:
         weight += 7
-        date_str = SOLAR_HOLIDAYS[(dt.month, dt.day)]
 
+    # 计算时间节点的权重
     if 22 <= dt.hour or dt.hour < 7:
         weight += 5
     elif 7 <= dt.hour < 12:
@@ -116,7 +115,25 @@ def calculate_weight(time_str: str):
     else:
         weight += 0
 
-    if not date_str:
-        date_str = f"{dt.month}月{dt.day}日"
+    return weight
 
-    return weight, date_str
+
+def special_date_calculation(time_str):
+    """
+    特殊日期计算。
+    :param time_str: 时间字符串
+    :return:总分数
+    """
+    dt = parse(time_str)
+    dt = dt.astimezone(pytz.timezone(const.TIME_ZONE))
+
+    # 农历节假日计算
+    lunar_date = LunarDate.fromSolarDate(dt.year, dt.month, dt.day)
+    if (lunar_date.month, lunar_date.day) in const.LUNAR_HOLIDAYS:
+        return const.LUNAR_HOLIDAYS[(lunar_date.month, lunar_date.day)]
+
+    # 公历节假日计算
+    if (dt.month, dt.day) in const.SOLAR_HOLIDAYS:
+        return const.SOLAR_HOLIDAYS[(dt.month, dt.day)]
+
+    return f"{dt.month}月{dt.day}日"

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EndOfYear</title>
-    {% if web_status == 1 %}
+    <title>{{ site.title }}</title>
+    {% if site.service == 1 %}
         <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/normalize.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/animate.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='painting/css/painting.css') }}">
@@ -19,7 +19,7 @@
 <body>
 <div class="container active animate__animated animate__fadeIn animate__slow" id="tab1">
     <audio id="bgm" loop>
-        {% if web_status == 1 %}
+        {% if site.service == 1 %}
             <source src="{{ url_for('static', filename='painting/music/bgm.mp3') }}" type="audio/mpeg">Your browser does
             not support the audio element.
         {% else %}
@@ -31,7 +31,7 @@
         <div class="notice">
             <h4>温馨提示</h4>
             <hr>
-            <p>EndofYear 使用互联网上公开的 RSS 数据源，并使用自建的 Umami 服务统计访问量，绝对不会主动获取个人隐私信息。🫣🫣🫣
+            <p>EndofYear 使用互联网公开的 RSS 数据源，并使用自建的 Umami 服务统计访问量，绝对不会主动获取个人隐私信息。🫣🫣🫣
                 <br>
                 <br>
                 开启方式：小手轻轻点 ~
@@ -47,14 +47,14 @@
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab2">
     <div class="tab2-box">
-        <p class="animate__animated animate__fadeIn animate__delay-1s">亲爱的{{ data.blog_name }}</p>
-        {% if data.blog_life == 0 %}
+        <p class="animate__animated animate__fadeIn animate__delay-1s">亲爱的{{ blog.name }}</p>
+        {% if blog.life == 0 %}
             <p class="animate__animated animate__fadeIn animate__delay-2s">旧事如梦，一年已过</p>
             <p class="animate__animated animate__fadeIn animate__delay-2s">贰三年、感谢有你!</p>
         {% else %}
             <p class="animate__animated animate__fadeIn animate__delay-2s">今天是我们相识的</p>
-            <p class="animate__animated animate__fadeIn animate__delay-3s">第 <small>{{ data.blog_life_year }}</small> 年
-                <small>{{ data.blog_life_day }}</small> 天</p>
+            <p class="animate__animated animate__fadeIn animate__delay-3s">第 <small>{{ blog.life // 365 }}</small> 年
+                <small>{{ blog.life % 365 }}</small> 天</p>
         {% endif %}
     </div>
 
@@ -62,23 +62,23 @@
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab3">
     <div class="tab3-box">
         <p class="animate__animated animate__fadeInUp animate__delay-1s">这一年你写下了</p>
-        <p class="animate__animated animate__fadeInUp animate__delay-2s"><small>{{ data.blog_article_count }}</small>
+        <p class="animate__animated animate__fadeInUp animate__delay-2s"><small>{{ blog.article_count }}</small>
             篇博文</p>
         <p class="animate__animated animate__fadeInUp animate__delay-3s">
-            <small>{{ data.blog_article_word_count }}</small> 个文字</p>
+            <small>{{ blog.article_word_count }}</small> 个文字</p>
     </div>
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab4">
     <div class="tab4-box">
-        <p class="animate__animated animate__fadeInDown animate__delay-1s">{{ data.blog_content_date }}那天，你写下了</p>
-        <p class="animate__animated animate__fadeInDown animate__delay-2s">{{ data.blog_title }}</p>
-        <p class="animate__animated animate__fadeInDown animate__delay-3s">{{ data.blog_content }}<small>……</small>
+        <p class="animate__animated animate__fadeInDown animate__delay-1s">{{ special_post.date }}那天，你写下了</p>
+        <p class="animate__animated animate__fadeInDown animate__delay-2s">{{ special_post.title }}</p>
+        <p class="animate__animated animate__fadeInDown animate__delay-3s">{{ special_post.content[:50] }}<small>……</small>
         </p>
     </div>
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab5">
     <div class="tab5-box">
-        {% for keyword in data.blog_top_keywords %}
+        {% for keyword in blog.top_post_keys[0:5] %}
             <p>{{ keyword[0] }}</p>
         {% endfor %}
         <p class="animate__animated animate__fadeInDown animate__delay-1s">这些都是<small>你</small>的</p>
@@ -87,13 +87,15 @@
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab6">
     <div class="tab6-box">
-        <p class="animate__animated animate__fadeInLeft animate__delay-1s">热爱{{ data.blog_category }}的你</p>
+        <p class="animate__animated animate__fadeInLeft animate__delay-1s">
+            热爱{% if blog.category == 1 %}生活{% else %}技术{% endif %}的你
+        </p>
         <p class="animate__animated animate__fadeInLeft animate__delay-2s">一定要继续砥砺前行!</p>
     </div>
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab7">
     <div class="tab7-box">
-        <p id="yiyan"> {{ data.blog_end_yiyan }}</p>
+        <p id="yiyan"> {{ custom.yiyan }}</p>
     </div>
 </div>
 

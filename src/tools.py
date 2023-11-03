@@ -1,9 +1,13 @@
 from datetime import datetime
 from urllib.parse import urlparse
 
+import pytz
 import requests
 from bs4 import BeautifulSoup
+from dateutil.parser import parse
 from loguru import logger
+
+import const
 
 
 def check_website_status(url):
@@ -54,10 +58,10 @@ def get_domain_life(url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
     }
-    domain_url = f"https://rdap.verisign.com/com/v1/domain/{url}"
+    domain = get_domain(url)
 
     try:
-        response = requests.get(domain_url, headers=headers, timeout=30)
+        response = requests.get(f"https://rdap.verisign.com/com/v1/domain/{domain}", headers=headers, timeout=30)
         response.raise_for_status()  # Raises stored HTTPError, if one occurred.
 
         registration_date = response.json().get('events')[0].get('eventDate')
@@ -87,7 +91,7 @@ def get_domain_life(url):
     except Exception as err:
         logger.error(f"未预期的错误: {err}")
 
-    return None
+    return 0
 
 
 def remove_html_tags(text):
@@ -105,7 +109,8 @@ def get_yiyan():
     :return:一言
     """
     try:
-        response = requests.get("https://v1.hitokoto.cn/?c=d&min_length=12&encode=text", timeout=30)  # Set timeout to 5 seconds
+        response = requests.get("https://v1.hitokoto.cn/?c=d&min_length=18&max_length=24&encode=text",
+                                timeout=30)  # Set timeout to 5 seconds
         if response.status_code == 200:
             return response.text
         else:
@@ -123,3 +128,27 @@ def get_yiyan():
     except Exception as e:
         logger.error(f"一言未知错误,错误:{e}")
         return False
+
+
+def get_multiple_of_100(string):
+    """
+    获取文章长度 100 的整除
+    :return:建议关键字数量
+    """
+    length = len(string)
+    multiple = length // 100
+    if multiple < 1:
+        multiple = 1
+    return multiple
+
+
+def format_datetime(dt_str):
+    """
+    格式化时间字符串为指定格式
+    :param dt_str:时间字符串
+    :return:指定格式
+    """
+    dt = parse(dt_str)
+    tz = pytz.timezone(const.TIME_ZONE)
+    formatted_dt = dt.astimezone(tz).strftime(const.FORMAT_TIME)
+    return formatted_dt
