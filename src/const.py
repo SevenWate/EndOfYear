@@ -1,14 +1,15 @@
+# 站点标题
+SITE_NAME = "EndOfYear"
+
+# 站点服务模式
+SITE_SERVICE_WEB = 1
+SITE_SERVICE_STATIC = 0
+
 # 时区
 TIME_ZONE = "Asia/Shanghai"
 
 # 时间格式
 FORMAT_TIME = "%Y-%m-%d %H:%M:%S"
-
-# 站点服务模式
-SITE_SERVICE = 1
-
-# 站点标题
-SITE_NAME = "EndOfYear"
 
 # 博客文章分类-生活
 BLOG_POST_CATEGORY_LIFE = 1

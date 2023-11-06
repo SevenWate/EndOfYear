@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 
 from loguru import logger
 
+import const
 from src.tools import check_website_status
 
 
@@ -70,30 +71,6 @@ class Config:
         return '.'.join(domain_parts[-2:])
 
     @property
-    def blog_data(self):
-        try:
-            data = self.config.get('blog', 'data', fallback=None)
-        except configparser.NoSectionError:
-            logger.error('未找到 section 配置项，请检查拼写')
-            return None
-
-        if not data:
-            logger.error('data 配置值为空')
-            return None
-
-        return json.loads(data)
-
-    @blog_data.setter
-    def blog_data(self, value):
-        if not self.config.has_section('blog'):
-            self.config.add_section('blog')
-
-        self.config.set('blog', 'data', json.dumps(value))
-
-        with open(self.path, 'w') as configfile:
-            self.config.write(configfile)
-
-    @property
     def web_status(self):
         try:
             web_status = self.config.get('default', 'web', fallback=None)
@@ -103,10 +80,10 @@ class Config:
 
         if web_status is None:
             logger.error('web 配置值为空')
-            return True
+            return const.SITE_SERVICE_WEB
 
-        if web_status == "True" or web_status == "true":
-            return True
+        if web_status == "True" or web_status == "true" or web_status == "t" or web_status == "T":
+            return const.SITE_SERVICE_WEB
 
-        if web_status == "False" or web_status == "false":
-            return False
+        if web_status == "False" or web_status == "false" or web_status == "f" or web_status == "F":
+            return const.SITE_SERVICE_STATIC

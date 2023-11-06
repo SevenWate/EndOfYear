@@ -1,8 +1,9 @@
 beautifulsoup4==4.12.2
-blinker==1.6.3
+blinker==1.7.0
 certifi==2023.7.22
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
 click==8.1.7
+docopt==0.6.2
 feedparser==6.0.10
 Flask==3.0.0
 idna==3.4
