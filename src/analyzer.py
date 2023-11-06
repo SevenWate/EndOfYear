@@ -5,7 +5,7 @@ from loguru import logger
 from lunardate import LunarDate
 from snownlp import SnowNLP
 
-import const
+from . import const
 
 
 # 计算文本内容情感分数

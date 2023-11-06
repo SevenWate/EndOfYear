@@ -4,9 +4,9 @@ from collections import Counter
 import feedparser
 from loguru import logger
 
-import analyzer
-import const
-import tools
+from . import analyzer
+from . import const
+from . import tools
 
 
 class Blog:

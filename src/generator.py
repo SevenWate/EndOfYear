@@ -2,8 +2,8 @@ from functools import lru_cache
 
 from loguru import logger
 
-import models
-import scraper
+from . import models
+from . import scraper
 
 
 @lru_cache(maxsize=None)

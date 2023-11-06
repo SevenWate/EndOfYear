@@ -1,11 +1,11 @@
 from flask import Flask, render_template, redirect, url_for
 from loguru import logger
 
-import const
-import models
-import tools
-from config import Config
-from generator import Generator
+from src import const
+from src import models
+from src import tools
+from src.config import Config
+from src.generator import Generator
 
 app = Flask(__name__)
 logger.add("endofyear.log")
@@ -41,7 +41,6 @@ def painting():
     logger.info(f"Sentiment Post: {generator.sentiment_post()}")
     logger.info(f"Long Post: {generator.long_post()}")
     logger.info(f"Short Post: {generator.short_post()}")
-    logger.info(f"Custom: {custom}")
 
     # 服务模式
     if config.web_status == const.SITE_SERVICE_STATIC:

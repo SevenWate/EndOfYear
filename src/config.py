@@ -1,12 +1,11 @@
 import configparser
-import json
 import os
 from urllib.parse import urlparse
 
 from loguru import logger
 
-import const
-from src.tools import check_website_status
+from . import const
+from .tools import check_website_status
 
 
 class Config:

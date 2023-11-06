@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from dateutil.parser import parse
 from loguru import logger
 
-import const
+from . import const
 
 
 def check_website_status(url):
