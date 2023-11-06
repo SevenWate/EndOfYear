@@ -109,7 +109,7 @@ def get_yiyan():
     :return:一言
     """
     try:
-        response = requests.get("https://v1.hitokoto.cn/?c=d&min_length=18&max_length=24&encode=text",
+        response = requests.get("https://v1.hitokoto.cn/?c=d&min_length=16&max_length=20&encode=text",
                                 timeout=30)  # Set timeout to 5 seconds
         if response.status_code == 200:
             return response.text

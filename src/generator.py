@@ -1,9 +1,12 @@
+from functools import lru_cache
+
 from loguru import logger
 
 import models
 import scraper
 
 
+@lru_cache(maxsize=None)
 class Generator:
 
     def __init__(self, rss):
