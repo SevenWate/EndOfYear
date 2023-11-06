@@ -70,31 +70,47 @@
 </div>
 <div class="container animate__animated animate__fadeIn animate__slow" id="tab4">
     <div class="tab4-box">
-        <p class="animate__animated animate__fadeInDown animate__delay-1s">{{ special_post.date }}那天，你写下了</p>
+        <p class="animate__animated animate__fadeInLeft animate__delay-1s"> 其中 </p>
+        <p class="animate__animated animate__fadeInLeft animate__delay-2s"> {{ long_post.title }} </p>
+        <p class="animate__animated animate__fadeInLeft animate__delay-3s"> {{ long_post.content[:50] }}</p>
+        <p class="animate__animated animate__fadeIn animate__delay-4s"> 长似一江春水</p>
+        <p class="animate__animated animate__fadeIn animate__delay-5s"> 永不止息 ~ </p>
+    </div>
+</div>
+<div class="container animate__animated animate__fadeIn animate__slow" id="tab5">
+    <div class="tab5-box">
+        <p class="animate__animated animate__fadeInDown animate__delay-1s">在{{ special_post.date }}那天，你写下了</p>
         <p class="animate__animated animate__fadeInDown animate__delay-2s">{{ special_post.title }}</p>
         <p class="animate__animated animate__fadeInDown animate__delay-3s">{{ special_post.content[:50] }}<small>……</small>
         </p>
     </div>
 </div>
-<div class="container animate__animated animate__fadeIn animate__slow" id="tab5">
-    <div class="tab5-box">
+<div class="container animate__animated animate__fadeIn animate__slow" id="tab6">
+    <div class="tab6-box">
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">{{ sentiment_post.title }}</p>
+        <p class="animate__animated animate__fadeInUp animate__delay-2s">{{ sentiment_post.content[:50] }}</p>
+        <p class="animate__animated animate__fadeIn animate__delay-3s">如初春的暖阳，宁静而怡人</p>
+    </div>
+</div>
+<div class="container animate__animated animate__fadeIn animate__slow" id="tab7">
+    <div class="tab7-box">
         {% for keyword in blog.top_post_keys[0:5] %}
-            <p>{{ keyword[0] }}</p>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">{{ keyword[0] }}</p>
         {% endfor %}
         <p class="animate__animated animate__fadeInDown animate__delay-1s">这些都是<small>你</small>的</p>
         <p class="animate__animated animate__fadeInDown animate__delay-2s">专属<small>关键词</small></p>
     </div>
 </div>
-<div class="container animate__animated animate__fadeIn animate__slow" id="tab6">
-    <div class="tab6-box">
+<div class="container animate__animated animate__fadeIn animate__slow" id="tab8">
+    <div class="tab8-box">
         <p class="animate__animated animate__fadeInLeft animate__delay-1s">
             热爱{% if blog.category == 1 %}生活{% else %}技术{% endif %}的你
         </p>
         <p class="animate__animated animate__fadeInLeft animate__delay-2s">一定要继续砥砺前行!</p>
     </div>
 </div>
-<div class="container animate__animated animate__fadeIn animate__slow" id="tab7">
-    <div class="tab7-box">
+<div class="container animate__animated animate__fadeIn animate__slow" id="tab9">
+    <div class="tab9-box">
         <p id="yiyan"> {{ custom.yiyan }}</p>
     </div>
 </div>
